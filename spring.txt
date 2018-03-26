@@ -1,0 +1,128 @@
+for spring - you can develop all the layers where as in struts or in any other frameworks you cannot do that
+
+Frontend - spring has it's own tag libraries
+dao - jdbc,orm
+EJB - spring j2ee
+
+- For a simple spring application, we do need to any additional server to run it - so it is light weighted
+
+- Modular frameworks
+
+  - In dao if you want you can use either spring jdbc or spring orm also
+  
+- In struts everyy action class should extend any class in api whereas in spring it is not like that
+
+- Modular Architecture 
+
+   - Each module will have a purpose
+   
+   Spring Core
+   Spring J2EE
+   Spring DAO(Spring JDBC)
+   Spring ORM (Spring Hibernate template)
+   Spring AOP
+   Spring web-MVC
+   
+   
+- Dependency Injection
+
+ - Setter Injection
+ - Constructor Injection
+ - Interface Injection
+ 
+- Scope
+
+ - Singleton(default scope) - per spring IOC container
+ - Prototype ( per factory.getBean(bean) - how many times you call that many times it will get instantiated)
+ - In core module
+    - Request
+	- Session
+ 
+ 
+ - The process of injecting the depending properties dynamically is called autowiring
+ 
+     - Autowiring can be done only on object types
+	 
+	 - byName, byType
+	 
+Conatiners
+ - XmlBeanFactory
+   - Bean wil get loaded at the time of factory.getBean
+ 
+ - ApplicationContext
+    - PreInstantion - at the time of application loading all beans will be loaded into the container
+	- It uses internaliztions
+	- Reads the properties from the property file
+	- It is an interface
+	  - filesystemxmlApplicationContext (for spring stand alone applications)
+	  - classPathxmlApplicationContext
+	  - xmlwebApplicationContext
+	- for all beans we have singleton scope, if the bean is defined as prototype scope then that bean will not participate in the pre instantion
+	
+
+- Reading properties file using springbean propertyplaceholderconfigurer
+
+-----------------------------------------------------------------------------------------
+
+To know if all the properties of the bean are set or not
+
+BeanNameAware Interface - If the bean implements this interface then beanid will be set to this beanname
+
+ApplicationContextAware Interface 
+
+BeanPost Interface - If any validation is to be done before or after bean initialization we cna override the method in the interface
+
+Initializing Bean - It has afterPropertiesSet method
+
+Disposable Bean - Any validation must be done just before the beans disposal
+
+
+
+
+
+
+
+---------------------------------------------------------------------
+
+Servlet call back methods - The methods when any event occured
+
+These all are call back methos which are invoked by any event, it could be invoked manually but that will not have any effect on the event
+
+Init
+
+Service
+
+Destroy
+
+
+loadonstartup(priority) - all servlets will be init method will be invoked based on priority when the request is passed for any servlet
+
+--------------------------------------------------------------------------------
+
+Spring MVC
+
+All the layers can be developed independently unlike sevrlets + jsp + dao
+
+
+
+request -------> Dispatcher Servlet (or) Front Controller ----------> Controller -----> Service -----> DB 
+
+DB -----> Service -----> Controller --ModelAndView Object-----> FrontController ---To Find Corresponding View---> View resolver ----->View ( Model object will be displayed in this view page)
+
+
+-------------------------------------------------------------------------------
+
+stereo type annotations
+
+After enabling the automatic component scan, then we can use these annotations so that spring could identify the class with the annotations as beans.So that we don't need to configure the beans in the xml file.
+
+@Service
+@Component
+@Repository - This annotation is usually used in dao classes, Internal generated sql exceptions will be displayed in the console in a detailed manner.
+@Controller
+
+
+
+
+
+                                                                                                         

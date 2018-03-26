@@ -1,0 +1,125 @@
+EJB - stateless, stateful, message driven
+
+JDBC - dependent to specific application
+
+when we are going to migrate to another db, we have to change logic in jdbc also
+
+load oracle driver from registry , get connection object, write statements and query against db objects
+
+
+ORM - database independent logic, backend db can be anything
+
+@Entity - The annotation to pojo class so that it would act as db object
+
+hibernate mapping.xml - every property in pojo should link up with every column in the corresponding table
+
+hibernate has different mapping files, every pojo class will have one mapping file and single property file
+
+Dialect class - every db will have a respective diallect class - this class whill cover the datatype of pojo object to related db type.
+
+for eg: string to varchar
+
+Relational mapping
+
+@Entity
+@Table(name = "tablename") when table name and pojo name are different
+
+@column(name= "columnname") when column name and pojo object name are different
+
+transient - it is not in sync with db
+persistent - it is in sync with db (at session.save or session.SaveorUpdate or session.persist) , To move an object from detach to persistent we have to perform the same operations as transient
+
+	- save method will return the id of the inserted object
+	- persist method will not return anything
+		
+detach - it is like closing the connection with db (it is eligible for garbage collection) - at session.evict, session.clear
+
+--------------------------------------------------------------------------------------------------
+
+JDBC - driver class for every database(class.forname("db"))
+establish connection(DriverManager.getconnection("dbhostname/user/pwd"))
+
+Simple statement - every time it is parsed before execute
+Prepared Statement - one time parsing and executes multiple times 
+
+--------------------------------------------------------------------------------------------------------
+
+Hibernate annotations
+@Entity - to map pojo to table
+@Table(name = "tablename" uniqueconstraints = "{
+@Id - primary key
+@uniqueconstraint - no duplicates
+@generatedKey has (Identity,autoincrement) - so that hiberante will automatically generate these values
+@genericgenrator - to get our own strategy 
+
+create sessionfactory object
+begintransaction
+set data into pojo class
+gettransaction and commit - (if transaction is not opened, then data will be inconsistent)
+
+if show sql property is true then the hql queries will be printed in the console
+
+@columnname - to map the object with the column name
+
+
+lazy loading, early loading
+--------------------------------------------------------------------------------------------------------------
+
+Load Objects:
+
+load and get method
+
+load will return proxy object witout hitting db
+
+If the object is not present in the db - the load will throw objectnotfound exception whereas get wil throw nullpointer
+
+load uses the lazy loading - the object data will be loaded only when the operations are performed for the retrieved data
+
+----------------------------------------------------------------------------------------------------------------------
+
+flushing -  Synching the object state held in the seeion with the db state (session.flush)
+
+flush modes - never, commit, manual, auto(will wait for the maximum updates on the data object), always(flush will happen before executing the next query)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+To insert Null value in db wrapper type
+To insert as 0 in db use primitive type
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+caching
+
+Session level
+Second level
+Query level
+
+------------------------------------------------------------------------------------------------------------------
+
+Associations
+second level - ehcache, treelevelcache
+Query level
+hql, critieria api, native sql
+
+------------------------------------------------------------------------------------------------------------------------
+
+
+Associations - The relationship should be maintained between pojo's(child and parent)
+
+one to many - unidirectional
+many to many
+one to one - 1 parent 1 child
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+cascadeType.ALL - The operations done on parent automatically same operations will be transfered to the it's child objects
+
+Entity,Table - class level annotations
+Id,Column - field level annotations
+
+
+
+
+
+

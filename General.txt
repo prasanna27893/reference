@@ -1,0 +1,45 @@
+
+String S1 = new String("abc"); // Objct will be created in the JVM heap
+String S = "abc"; // The object will be created in SCP , when create using literal
+String S2="abc";
+
+S1==S // false
+S1.equals(S) // true - equals method will compare the values as it is overriden in the string class
+
+
+S==S2 // true
+S.equals(S2) // true
+
+
+** The strings are immutable because if any refer string is changed then it should not chnge the other reference values also. A new object will be created with the 
+modified one.
+
+
+StringBuffer S1 = new StringBuffer("abc");
+StringBuffer S = new StringBuffer("abc");
+
+S1==S //false
+S1.equals(S) // false - the equals method is not overriden in the buffer class, so the real behaviour of equals method is to 
+                        compare the reference.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+Primitive to wrapper - boxing
+wrapper to primitive - unboxing
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+logger level
+
+OFF  
+FATAL - 100
+Error - 200
+Warn - 300
+Info - 400
+Debug - 500
+Trace - 600
+All
+
+
+
+
